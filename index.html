@@ -1,51 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <title>Location-based AR</title>
-  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
-  <script>
-
-    window.addEventListener('load', () => {
-      console.log("Page loading completed");
-
-      const placeSphere = (lat, lon) => {
-        const scene = document.querySelector('a-scene');
-        const sphere = document.createElement('a-sphere');
-        sphere.setAttribute('gps-entity-place', `latitude: ${lat}; longitude: ${lon};`);
-        sphere.setAttribute('radius', '5');
-        sphere.setAttribute('material', 'color: red;');
-        scene.appendChild(sphere);
-        console.log(`The longitude and latitude of the ball: ${lat}, ${lon}`);
-      };
-
-      const latitude = 51.45582;
-      const longitude = -2.60296;
-
-      placeSphere(latitude, longitude);
-    });
-
-
-    if ("geolocation" in navigator) {
-       navigator.geolocation.getCurrentPosition(function(position) {
-         console.log("Current location: ", position.coords.latitude, position.coords.longitude);
-       });
-     } else {
-       console.log("No GPS");
-     }
-  </script>
+<title>AR.js A-Frame Location-based</title>
+<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js'></script>
+<script type='text/javascript' src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
 </head>
-<body style="margin: 0; overflow: hidden;">
-<a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-
-  <a-entity camera gps-camera rotation-reader></a-entity>
-
-
-  <a-sphere
-    gps-entity-place="latitude: 51.45582; longitude: -2.60296;"
-    radius="5"
-    material="color: red;">
-  </a-sphere>
+<body>
+<a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
+    <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+    <a-entity material='color: red' geometry='primitive: box' gps-new-entity-place="latitude: <add-your-latitude>; longitude: <add-your-longitude>" scale="10 10 10"></a-entity>
 </a-scene>
 </body>
 </html>
