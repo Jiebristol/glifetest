@@ -26,13 +26,13 @@
     });
 
 
-    // if ("geolocation" in navigator) {
-    //   navigator.geolocation.getCurrentPosition(function(position) {
-    //     console.log("Current location: ", position.coords.latitude, position.coords.longitude);
-    //   });
-    // } else {
-    //   console.log("No GPS");
-    // }
+    if ("geolocation" in navigator) {
+       navigator.geolocation.getCurrentPosition(function(position) {
+         console.log("Current location: ", position.coords.latitude, position.coords.longitude);
+       });
+     } else {
+       console.log("No GPS");
+     }
   </script>
 </head>
 <body style="margin: 0; overflow: hidden;">
